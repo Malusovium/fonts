@@ -50,7 +50,7 @@
 
         packages.quicksand = pkgs.stdenvNoCC.mkDerivation {
         # defaultPackage = pkgs.stdenvNoCC.mkDerivation {
-          name = "alex-brush";
+          name = "quicksand";
           # dontConfigue = true;
           src = pkgs.fetchurl {
           
