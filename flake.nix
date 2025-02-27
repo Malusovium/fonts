@@ -11,14 +11,14 @@
         pkgs = nixpkgs.legacyPackages.${system};
         font_squirel = name: "https://www.fontsquirrel.com/fonts/download/${name}"; 
       in {
-        # defaultPackage = pkgs.symlinkJoin {
-        #   name = "myfonts-0.1.4";
-        #   paths = builtins.attrValues
-        #     self.packages.${system}; # Add font derivation names here
-        # };
+        defaultPackage = pkgs.symlinkJoin {
+          name = "myfonts-0.1.4";
+          paths = builtins.attrValues
+            self.packages.${system}; # Add font derivation names here
+        };
 
-        # packages.alex-brush = pkgs.stdenvNoCC.mkDerivation {
-        defaultPackage = pkgs.stdenvNoCC.mkDerivation {
+        packages.alex-brush = pkgs.stdenvNoCC.mkDerivation {
+        # defaultPackage = pkgs.stdenvNoCC.mkDerivation {
           name = "alex-brush";
           # dontConfigue = true;
           src = pkgs.fetchurl {
@@ -30,7 +30,7 @@
           unpackPhase = ''
             runHook preUnpack
             # echo "hello"
-            ls $src
+            # ls $src
             unzip $src
 
             runHook postUnpack
