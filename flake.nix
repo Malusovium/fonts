@@ -27,49 +27,63 @@
             # stripRoot = false;
           };
           unpackPhase = ''
+            # runhook PreUnpack
             # echo "hello"
             ls $src
             unzip $src
+
+            # runhook PostUnpack
           '';
           installPhase = ''
+            # runhook PreInstall
             # unzip alex-brush.zip
-            mkdir -p $out/share/fonts/opentype/
-            cp -R $src $out/share/fonts/opentype/
+            mkdir -p $out/share/fonts/truetype/
+            cp *.ttf $src $out/share/fonts/truetype/
+
+            # runhook PostInstall
           '';
           meta = { description = "A Gill Sans Font Family derivation."; };
           nativeBuildInputs = [pkgs.unzip];
         };
 
-        packages.gillsans = pkgs.stdenvNoCC.mkDerivation {
-          name = "gillsans-font";
-          dontConfigue = true;
-          src = pkgs.fetchzip {
-            url =
-              "https://freefontsvault.s3.amazonaws.com/2020/02/Gill-Sans-Font-Family.zip";
-            sha256 = "sha256-YcZUKzRskiqmEqVcbK/XL6ypsNMbY49qJYFG3yZVF78=";
-            stripRoot = false;
-          };
-          installPhase = ''
-            mkdir -p $out/share/fonts
-            cp -R $src $out/share/fonts/opentype/
-          '';
-          meta = { description = "A Gill Sans Font Family derivation."; };
-        };
+        # packages.gillsans = pkgs.stdenvNoCC.mkDerivation {
+        #   name = "gillsans-font";
+        #   dontConfigue = true;
+        #   src = pkgs.fetchzip {
+        #     url =
+        #       "https://freefontsvault.s3.amazonaws.com/2020/02/Gill-Sans-Font-Family.zip";
+        #     sha256 = "sha256-YcZUKzRskiqmEqVcbK/XL6ypsNMbY49qJYFG3yZVF78=";
+        #     stripRoot = false;
+        #   };
+        #   installPhase = ''
+        #     runhook PreInstall
 
-        packages.palatino = pkgs.stdenvNoCC.mkDerivation {
-          name = "palatino-font";
-          dontConfigue = true;
-          src = pkgs.fetchzip {
-            url =
-              "https://www.dfonts.org/wp-content/uploads/fonts/Palatino.zip";
-            sha256 = "sha256-FBA8Lj2yJzrBQnazylwUwsFGbCBp1MJ1mdgifaYches=";
-            stripRoot = false;
-          };
-          installPhase = ''
-            mkdir -p $out/share/fonts
-            cp -R $src/Palatino $out/share/fonts/truetype/
-          '';
-          meta = { description = "The Palatino Font Family derivation."; };
-        };
+        #     mkdir -p $out/share/fonts/opentype/
+        #     cp -R $src $out/share/fonts/opentype/
+
+        #     runhook PostInstall
+        #   '';
+        #   meta = { description = "A Gill Sans Font Family derivation."; };
+        # };
+
+        # packages.palatino = pkgs.stdenvNoCC.mkDerivation {
+        #   name = "palatino-font";
+        #   dontConfigue = true;
+        #   src = pkgs.fetchzip {
+        #     url =
+        #       "https://www.dfonts.org/wp-content/uploads/fonts/Palatino.zip";
+        #     sha256 = "sha256-FBA8Lj2yJzrBQnazylwUwsFGbCBp1MJ1mdgifaYches=";
+        #     stripRoot = false;
+        #   };
+        #   installPhase = ''
+        #     runhook PreInstall
+
+        #     mkdir -p $out/share/fonts/truetype/
+        #     cp -R $src/Palatino $out/share/fonts/truetype/
+
+        #     runhook PostInstall
+        #   '';
+        #   meta = { description = "The Palatino Font Family derivation."; };
+        # };
       });
 }
