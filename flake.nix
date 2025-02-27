@@ -48,6 +48,36 @@
           nativeBuildInputs = [pkgs.unzip];
         };
 
+        packages.quicksand = pkgs.stdenvNoCC.mkDerivation {
+        # defaultPackage = pkgs.stdenvNoCC.mkDerivation {
+          name = "alex-brush";
+          # dontConfigue = true;
+          src = pkgs.fetchurl {
+          
+            url = font_squirel "quicksand";
+            sha256 = "sha256-Bh4K79gLu7mnnGEzzDQjorTTPhy4Cx6uBhG3u6CzcE8=";
+            # stripRoot = false;
+          };
+          unpackPhase = ''
+            runHook preUnpack
+            # echo "hello"
+            # ls $src
+            unzip $src
+
+            runHook postUnpack
+          '';
+          installPhase = ''
+            runHook preInstall
+            ls *.otf
+            # unzip alex-brush.zip
+            mkdir -p $out/share/fonts/opentype/
+            install -Dm644 *.otf $out/share/fonts/opentype/
+
+            runHook postInstall
+          '';
+          meta = { description = "A flowy font named alex brush"; };
+          nativeBuildInputs = [pkgs.unzip];
+        };
         # packages.gillsans = pkgs.stdenvNoCC.mkDerivation {
         #   name = "gillsans-font";
         #   dontConfigue = true;
