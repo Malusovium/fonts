@@ -19,7 +19,7 @@
 
         packages.alex-brush = pkgs.stdenvNoCC.mkDerivation {
           name = "alex-brush";
-          dontConfigue = true;
+          # dontConfigue = true;
           src = pkgs.fetchurl {
           
             url = font_squirel "alex-brush";
@@ -27,22 +27,22 @@
             # stripRoot = false;
           };
           unpackPhase = ''
-            # runhook PreUnpack
+            runHook preUnpack
             # echo "hello"
             ls $src
             unzip $src
 
-            # runhook PostUnpack
+            runHook postUnpack
           '';
           installPhase = ''
-            # runhook PreInstall
+            runHook preInstall
             # unzip alex-brush.zip
             mkdir -p $out/share/fonts/truetype/
             cp *.ttf $src $out/share/fonts/truetype/
 
-            # runhook PostInstall
+            runHook postInstall
           '';
-          meta = { description = "A Gill Sans Font Family derivation."; };
+          meta = { description = "A flowy font named alex brush"; };
           nativeBuildInputs = [pkgs.unzip];
         };
 
