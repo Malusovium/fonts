@@ -36,9 +36,10 @@
           '';
           installPhase = ''
             runHook preInstall
+            ls *.ttf
             # unzip alex-brush.zip
             mkdir -p $out/share/fonts/truetype/
-            cp *.ttf $src $out/share/fonts/truetype/
+            install -Dm644 *.ttf $out/share/fonts/truetype/
 
             runHook postInstall
           '';
