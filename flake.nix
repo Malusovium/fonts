@@ -79,6 +79,12 @@
           sha = "sha256-ZXH2ZPP/VK0SnLKr41h5WBMuTczCm1FqxLNQ3+Mb+7g=";
           type = "ttf";
         };
+
+        packages.caviar-dreams = make_font_squirrel {
+          name = "caviar-dreams";
+          sha = "sha256-IetJKRLl6xbruSVNNbBDqp2bIwDlpaWkX5sBblMV2W0=";
+          type = "ttf";
+        };
         # packages.alex-brush = pkgs.stdenvNoCC.mkDerivation {
         # # defaultPackage = pkgs.stdenvNoCC.mkDerivation {
         #   name = "alex-brush";
