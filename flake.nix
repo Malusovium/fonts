@@ -85,6 +85,12 @@
           sha = "sha256-IetJKRLl6xbruSVNNbBDqp2bIwDlpaWkX5sBblMV2W0=";
           type = "ttf";
         };
+
+        packages.tex-gyre-cursor = make_font_squirrel {
+          name = "tex-gyre-cursor";
+          sha = "sha256-dNtpJr+6SzaV4tf4O8MZ0XDHSWFHidULla+YA0apqGk=";
+          type = "otf";
+        };
         # packages.alex-brush = pkgs.stdenvNoCC.mkDerivation {
         # # defaultPackage = pkgs.stdenvNoCC.mkDerivation {
         #   name = "alex-brush";
