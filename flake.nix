@@ -10,6 +10,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         font_squirrel = name: "https://www.fontsquirrel.com/fonts/download/${name}"; 
+        font_1001 = name: "https://www.1001fonts.com/download/${name}.zip";
         font_install_command = type:
           if type == "ttf" then
             ''              
@@ -23,14 +24,16 @@
             ''
           else type
         ;   
-        make_font_squirrel = {name, sha, type}:
+        make_font_squirrel = make_font_maker font_squirrel;
+        make_font_1001 = make_font_maker font_1001;
+        make_font_maker = make_url: {name, sha, type}:
           pkgs.stdenvNoCC.mkDerivation {
                   # defaultPackage = pkgs.stdenvNoCC.mkDerivation {
                     name = name;
                     # dontConfigue = true;
                     src = pkgs.fetchurl {
           
-                      url = font_squirrel name;
+                      url = make_url name;
                       sha256 = sha;
                       # stripRoot = false;
                     };
@@ -89,6 +92,11 @@
         packages.tex-gyre-cursor = make_font_squirrel {
           name = "tex-gyre-cursor";
           sha = "sha256-dNtpJr+6SzaV4tf4O8MZ0XDHSWFHidULla+YA0apqGk=";
+          type = "otf";
+        };
+        packages.stormfaze = make_font_1001 {
+          name = "stormfaze";
+          sha = "sha256-HiZPrg+Gf0T34Fds+tIY9RHNCQbF9Q77aPFLIKThgDE=";
           type = "otf";
         };
         # packages.alex-brush = pkgs.stdenvNoCC.mkDerivation {
